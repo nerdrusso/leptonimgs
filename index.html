@@ -7,18 +7,25 @@
 <div id="img_home"></div>
 
 <script>
+let d = "";
 let w = screen.width;
 w = w / 2.1;
 let ranks = [];
+function remove(string, from, to) {
+    return string.slice(0, from) + string.slice(to);
+}
 const http = new XMLHttpRequest()
-http.open("GET", "https://docs.google.com/spreadsheets/d/17-nf9azzBNQu0zrHxGOxxKZohZj_mMbp_zsDkXzEPyo/export?format=tsv")
+http.open("GET", "https://docs.google.com/spreadsheets/d/1878ketoUIKHLooXdFrWRWLaxPe-TDhcrjJZVfxokOR8/export?format=tsv")
 http.send()
 http.onload = () => {
 let text = http.responseText;
 ranks = text.split("\n");
-  ranks.forEach(function (e) {
+ranks.shift();
+ranks.forEach(function (e) {
     var img = new Image();
-    img.src = e;
+    d = e;
+    d = remove(d, 0, 19);
+    img.src = d;
     img.width = w;
     img_home.appendChild(img);
 });
