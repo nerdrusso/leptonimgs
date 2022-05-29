@@ -1,12 +1,27 @@
-<!DOCTYPE html>
 <html>
-  <p id="greeting">yay</p>
+ <head>
+    <title>database</title>
+ </head>
+ <body>
+
+<div id="img_home"></div>
+
 <script>
-  
+let w = screen.width;
+w = w / 2.1;
+let ranks = [];
 const http = new XMLHttpRequest()
-http.open("GET", "https://docs.google.com/spreadsheets/d/1BYYzj9oMhDXlz3ZhJMuECFOTwnB9WfAF8f7zocTQgm8/export?format=csv")
+http.open("GET", "https://docs.google.com/spreadsheets/d/17-nf9azzBNQu0zrHxGOxxKZohZj_mMbp_zsDkXzEPyo/export?format=tsv")
 http.send()
-http.onload = () => document.getElementById("greeting").innerHTML = (http.responseText)
-  
+http.onload = () => {
+let text = http.responseText;
+ranks = text.split("\n");
+  ranks.forEach(function (e) {
+    var img = new Image();
+    img.src = e;
+    img.width = w;
+    img_home.appendChild(img);
+});
+};
 </script>
-</html>
+</body>
